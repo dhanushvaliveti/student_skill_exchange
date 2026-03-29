@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Welcome, {{ request.user.username }}</h2>
+
+<hr>
+
+<div class="card">
+    <h3>Account Overview</h3>
+
+    <p><strong>Credits:</strong> {{ profile.credits }}</p>
+    <p><strong>Streak:</strong> 🔥 {{ profile.streak }}</p>
+    <p><strong>Learned:</strong> {{ profile.sessions_learned }}</p>
+    <p><strong>Taught:</strong> {{ profile.sessions_taught }}</p>
+</div>
+
+<h3>Quick Actions</h3>
+
+<a href="/skills/">
+    <button class="btn">Browse Skills</button>
+</a>
+
+<a href="/skills/add/">
+    <button class="btn">Add Skill</button>
+</a>
+
+<a href="/requests/">
+    <button class="btn">My Requests</button>
+</a>
+
+<a href="/leaderboard/">
+    <button class="btn">Leaderboard</button>
+</a>
+
+<a href="/buy-credits/">
+    <button class="btn">Buy Credits</button>
+</a>
+
+{% endblock %}

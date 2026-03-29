@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Buy Credits</h2>
+
+<hr>
+
+<div style="background:white; padding:20px; border-radius:5px;">
+
+<form method="POST">
+    {% csrf_token %}
+
+    <p><strong>Select a package:</strong></p>
+
+    <button class="btn" type="submit" name="credits" value="10">
+        Buy 10 Credits - ₹50
+    </button><br><br>
+
+    <button class="btn" type="submit" name="credits" value="25">
+        Buy 25 Credits - ₹100
+    </button><br><br>
+
+    <button class="btn" type="submit" name="credits" value="50">
+        Buy 50 Credits - ₹180
+    </button>
+
+</form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>My Requests</h2>
+
+<hr>
+
+<h3>📥 Requests Received (You are Teacher)</h3>
+
+{% for req in received %}
+<div class="card">
+    <p><strong>Skill:</strong> {{ req.skill.name }}</p>
+    <p><strong>Status:</strong> {{ req.status }}</p>
+
+    {% if req.status == "pending" %}
+        <a href="/accept-request/{{ req.id }}/">
+            <button class="btn">Accept</button>
+        </a>
+
+    {% elif req.status == "accepted" %}
+        <a href="/schedule/{{ req.id }}/">
+            <button class="btn">Schedule</button>
+        </a>
+
+    {% elif req.status == "scheduled" %}
+        <a href="/session/{{ req.id }}/">
+            <button class="btn">Go to Session</button>
+        </a>
+    {% endif %}
+</div>
+{% empty %}
+<p>No incoming requests</p>
+{% endfor %}
+
+<hr>
+
+<h3>📤 Requests Sent (You are Learner)</h3>
+
+{% for req in sent %}
+{% if req.status == "scheduled" %}
+    <a href="/session/{{ req.id }}/">
+        <button class="btn">Go to Session</button>
+    </a>
+{% endif %}
+<div style="background:white; padding:15px; margin-bottom:10px; border-radius:5px;">
+    
+    <p><strong>Skill:</strong> {{ req.skill.name }}</p>
+    <p><strong>To:</strong> {{ req.receiver.username }}</p>
+    <p><strong>Status:</strong> {{ req.status }}</p>
+
+</div>
+{% empty %}
+<p>No sent requests</p>
+{% endfor %}
+
+{% endblock %}

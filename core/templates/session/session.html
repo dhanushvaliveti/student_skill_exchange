@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+
+    <h2>Session Details</h2>
+    <hr>
+
+    <p><strong>Skill:</strong> {{ req.skill.name }}</p>
+    <p><strong>Date:</strong> {{ req.scheduled_date }}</p>
+    <p><strong>Time:</strong> {{ req.scheduled_time }}</p>
+
+</div>
+
+<div class="card">
+
+    <h3>Meeting</h3>
+
+    {% if req.meeting_link %}
+        <a href="{{ req.meeting_link }}" target="_blank">
+            <button class="btn">Join Session</button>
+        </a>
+    {% else %}
+        <p><em>Meeting link not added yet</em></p>
+    {% endif %}
+
+</div>
+
+<div class="card">
+
+    <h3>Discussion</h3>
+
+    <p><strong>{{ req.sender.username }}:</strong> Let's meet at scheduled time</p>
+    <p><strong>{{ req.receiver.username }}:</strong> Use the meeting link to join</p>
+
+    <!-- DEBUG (remove later) -->
+    <p>Status: {{ req.status }}</p>
+    <p>Link: {{ req.meeting_link }}</p>
+
+</div>
+
+<div class="card">
+
+    <form method="POST" action="/complete/{{ req.id }}/">
+        {% csrf_token %}
+        <button class="btn">Confirm Session Completed</button>
+    </form>
+
+</div>
+
+{% endblock %}

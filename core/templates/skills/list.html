@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Available Skills</h2>
+
+<hr>
+
+{% if skills %}
+
+    {% for skill in skills %}
+    <div class="card">
+
+    <h2 style="margin:0;">{{ skill.name }}</h2>
+    <p style="opacity:0.8;">Level: {{ skill.level }}</p>
+
+    <p style="font-style: italic;">"{{ skill.description }}"</p>
+
+    <p><strong>By:</strong> {{ skill.owner.username }}</p>
+
+    {% if skill.owner != request.user %}
+        <a href="/send-request/{{ skill.id }}/">
+            <button class="btn">Request</button>
+        </a>
+    {% else %}
+        <p style="color:#ffd;">Your Skill</p>
+    {% endif %}
+
+</div>
+    {% endfor %}
+
+{% else %}
+
+<div class="empty-box">
+    <h3>No Skills Yet</h3>
+    <p>Add your skills and start teaching others</p>
+</div>
+
+{% endif %}
+
+{% endblock %}
